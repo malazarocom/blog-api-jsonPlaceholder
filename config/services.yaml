@@ -17,8 +17,27 @@ services:
         resource: '../src/'
         exclude:
             - '../src/DependencyInjection/'
-            - '../src/Entity/'
+            - '../src/Shared/Infrastructure/Uuid/'
+            # - '../src/Blog/Post/Article/Domain/'
             - '../src/Kernel.php'
+            - '../src/Tests/'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    
+    App\Shared\Infrastructure\Utils\HttpClientInterface: '@App\Shared\Infrastructure\Utils\SymfonyHttpClient'
+    
+    App\Shared\Infrastructure\JsonPlaceholder\JsonPlaceholderClient:
+        arguments:
+            $client: '@json_placeholder_api'
+
+    App\Blog\Post\Article\Infrastructure\JsonPlaceholderArticleRepository: ~
+    App\Blog\Post\Article\Domain\ArticleRepository: '@App\Blog\Post\Article\Infrastructure\JsonPlaceholderArticleRepository'
+    
+
+    App\Infrastructure\Persistence\Author\JsonPlaceholderAuthorRepository: ~
+    App\Domain\Author\AuthorRepository: '@App\Infrastructure\Persistence\Author\JsonPlaceholderAuthorRepository'
+
+    # 'App\DataProvider\ArticleDataProvider':
+    #     tags: [ { name: 'api_platform.collection_data_provider', priority: 2 } ]
+    #     autoconfigure: false

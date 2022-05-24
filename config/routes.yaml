@@ -1,6 +1,24 @@
-controllers:
-    resource: ../src/Controller/
+# controllers:
+#     resource: ../src/Controller/
+#     type: annotation
+# controllersArticle:
+#     resource: ../src/Shared/Front/Controller/
+#     type: annotation
+
+# api_routes:
+#     resource: ../src/Infrastructure/Api/Controller
+#     type: annotation
+#     prefix: '/api'
+#     name_prefix: api_
+
+front_routes:
+    resource: ../src/Shared/Front/Controller
     type: annotation
+    name_prefix: front_
+
+front_default_route:
+  path: /blog/articles
+  controller: App\Shared\Front\Controller\ArticlesController::allArticles
 
 kernel:
     resource: ../src/Kernel.php

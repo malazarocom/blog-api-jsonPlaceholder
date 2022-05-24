@@ -1,0 +1,14 @@
+{
+  "build/frontend.css": "http://127.0.0.1:9001/build/frontend.css",
+  "build/frontend.js": "http://127.0.0.1:9001/build/frontend.js",
+  "build/runtime.js": "http://127.0.0.1:9001/build/runtime.js",
+  "build/assets_controllers_frontend_index_controller_js.js": "http://127.0.0.1:9001/build/assets_controllers_frontend_index_controller_js.js",
+  "build/vendors-node_modules_webpack-dev-server_client_index_js_protocol_ws_3A_hostname_127_0_0_1_por-66cc83.js": "http://127.0.0.1:9001/build/vendors-node_modules_webpack-dev-server_client_index_js_protocol_ws_3A_hostname_127_0_0_1_por-66cc83.js",
+  "build/vendors-node_modules_core-js_modules_es_object_create_js-node_modules_core-js_modules_es_obje-e078df.js": "http://127.0.0.1:9001/build/vendors-node_modules_core-js_modules_es_object_create_js-node_modules_core-js_modules_es_obje-e078df.js",
+  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_bootstrap_dist_js_boo-8cdc70.js": "http://127.0.0.1:9001/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_bootstrap_dist_js_boo-8cdc70.js",
+  "build/vendors-node_modules_core-js_modules_es_object_create_js-node_modules_core-js_modules_es_obje-57d835.js": "http://127.0.0.1:9001/build/vendors-node_modules_core-js_modules_es_object_create_js-node_modules_core-js_modules_es_obje-57d835.js",
+  "build/vendors-node_modules_core-js_modules_es_array_concat_js-node_modules_core-js_modules_es_objec-083084.js": "http://127.0.0.1:9001/build/vendors-node_modules_core-js_modules_es_array_concat_js-node_modules_core-js_modules_es_objec-083084.js",
+  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_bootstrap_dist_js_boo-58b77b.js": "http://127.0.0.1:9001/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_bootstrap_dist_js_boo-58b77b.js",
+  "build/vendors-node_modules_infinite-scroll_js_index_js.js": "http://127.0.0.1:9001/build/vendors-node_modules_infinite-scroll_js_index_js.js",
+  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_bootstrap_dist_js_boo-7d61f3.js": "http://127.0.0.1:9001/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_bootstrap_dist_js_boo-7d61f3.js"
+}

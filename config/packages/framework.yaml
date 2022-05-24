@@ -17,6 +17,11 @@ framework:
     php_errors:
         log: true
 
+    http_client:
+        scoped_clients:
+            json_placeholder_api:
+                base_uri: '%env(JSON_PLACEHOLDER_BASE_URI)%'
+
 when@test:
     framework:
         test: true

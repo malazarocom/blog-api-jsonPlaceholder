@@ -1,19 +1,44 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+{% apply spaceless %}
+{% set route_name_actual = app.request.attributes.get('_route') %}
+{% set route_parameters_actual = app.request.attributes.get('_route_params') %}
+{% set cmp = true %}
+{% endapply %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="icon" href="https://www.ipglobal.es/wp-content/uploads/2017/11/ipglobal-favicon.png" sizes="32x32">
+
+        {% block metas %}{% endblock %}
+         {% block stylesheets %}
+            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+            <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&amp;display=swap">
+  
+            {{ encore_entry_link_tags('frontend') }}
         {% endblock %}
+        
+        {% block tags_head %}{% endblock %}
+
+        {% block javascripts_head %}{% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
+    
+    <body {% block body_attributes %}{% endblock %}>
+        {{ include('common/header.html.twig') }}
+        
+        <!--Main layout-->
+        <main class="my-5">
+            {% block content %}{% endblock %}
+        </main>
+        <!--Main layout-->
+        
+        {{ include('common/footer.html.twig') }}
+
+        {% block modals %}{% endblock %}
+        
+        {% block javascripts_body %}
+            {{ encore_entry_script_tags('frontend') }}
+        {% endblock %}
     </body>
 </html>

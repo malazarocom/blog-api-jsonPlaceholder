@@ -1,4 +1,7 @@
 const Encore = require('@symfony/webpack-encore');
+const fs = require('fs');
+const path = require('path');
+const { exec } = require("child_process");
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -20,8 +23,9 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
-    .addEntry('app', './assets/app.js')
-
+    .addEntry('frontend', './assets/javascripts/frontend/frontend.js')
+    
+//    .addStyleEntry('tagify_css', './assets/styles/pages/tagify.css')
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
 
@@ -56,7 +60,7 @@ Encore
     })
 
     // enables Sass/SCSS support
-    //.enableSassLoader()
+    .enableSassLoader()
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
@@ -69,7 +73,32 @@ Encore
     //.enableIntegrityHashes(Encore.isProduction())
 
     // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
+    .autoProvidejQuery()
+
+    .copyFiles({
+      from: './assets/images',
+      // optional target path, relative to the output dir
+      //to: 'images/[path][name].[ext]',
+
+      // if versioning is enabled, add the file hash too
+      //to: 'images/[path][name].[hash:8].[ext]',
+
+      // only copy files matching this pattern
+      //pattern: /\.(png|jpg|jpeg)$/
+    })
+
+    .configureDevServerOptions(options => {
+      const certFile = path.join(process.env.HOME, '.symfony/certs/default.p12');
+      try {
+        if (fs.existsSync(path)) {
+          options.https = {
+            pfx: certFile,
+          }
+        }
+      } catch(err) {
+        console.error(err)
+      }
+    })
 ;
 
 module.exports = Encore.getWebpackConfig();

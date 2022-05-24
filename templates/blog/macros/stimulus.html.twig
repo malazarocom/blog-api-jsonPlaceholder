@@ -1,0 +1,143 @@
+{##
+ # Utilidades para facilitar el uso de stimulus en las plantillas
+ #
+ # Importar la macro para su uso y podemos crear una variable 'controller' para simplificar su uso:
+ #
+ # {% import "macros/stimulus.html.twig" as stimulus %}
+ # {% set controller = "gallery-finder" %}
+ #}
+
+{##
+ # Genera el atributo 'data-controller' con multiples controladores. Si se le pasan values también añade los
+ # correspondientes atributos de value del controlador correspondiente.
+ #
+ #   {{ stimulus.controllers(["gallery-finder", "geographical-search"]) }}
+ #   ===========================================
+ #   data-controller="gallery-finder geographical-search"
+ #
+ #   {{ stimulus.controllers({"gallery-finder": { pagination: 20, type: "Post" }, "geographical-search": {"selected-brand": "alfa-romeo"}}) }}
+ #   =============================================================================
+ #   data-controller="gallery-finder geographical-search"
+ #   data-gallery-finder-pagination-value="20"
+ #   data-gallery-finder-type-value="Post"
+ #   data-geographical-search-selected-brand-value="alfa-romeo"
+ #
+ # @param hash controllers. Controllers agrupados por controlador y values.
+ #}
+{% macro controllers(controllers, values = {}) %}
+    {% apply spaceless %}
+        {% if (array_check_list(controllers)) %}
+            data-controller="{{ controllers|map((value, key) => "#{value}")|join(' ') }}"
+        {% else %}
+            data-controller="{{ controllers|keys|join(' ') }}"
+            {% for controller, values in controllers %}
+            {{ _self.values(controller, values) }}
+            {% endfor %}
+        {% endif %}
+    {% endapply %}
+{% endmacro %}
+
+{##
+ # Genera el atributo 'data-controller' con el controlador indicado. Si se le pasan values también añade los
+ # correspondientes atributos de value.
+ #
+ #   {{ stimulus.controller("gallery-finder") }}
+ #   ===========================================
+ #   data-controller="gallery-finder"
+ #
+ #   {{ stimulus.controller("gallery-finder", { pagination: 20, type: "Post" }) }}
+ #   =============================================================================
+ #   data-controller="gallery-finder"
+ #   data-gallery-finder-pagination-value="20"
+ #   data-gallery-finder-type-value="Post"
+ #
+ # @param string controller. Nombre del controlador. Ej.: 'gallery-finder'
+ # @param hash   values.     Hash con los nombres de los valores y su contenido. Ej.: { pagination: 20, type: "Post" }
+ #}
+{% macro controller(controller, values = {}) %}
+    {% apply spaceless %}
+    data-controller="{{ controller }}" {{ _self.values(controller, values) }}
+    {% endapply %}
+{% endmacro %}
+
+{##
+ # Genera los atributos de los valores relacionados con el controlador.
+ #
+ #   {{ stimulus.values("gallery-finder", { pagination: 20, type: "Post" }) }}
+ #   =========================================================================
+ #   data-gallery-finder-pagination-value="20"
+ #   data-gallery-finder-type-value="Post"
+ #
+ # @param string controller. Nombre del controlador. Ej.: 'gallery-finder'
+ # @param hash   values.     Hash con los nombres de los valores y su contenido. Ej.: { pagination: 20, type: "Post" }
+ #}
+{% macro values(controller, values) %}
+    {% apply spaceless %}
+    {% for value, content in values %} {{ _self.value(controller, value, content) }}{% endfor %}
+    {% endapply %}
+{% endmacro %}
+
+{##
+ # Genera el atributo del valor relacionado con el controlador.
+ #
+ #   {{ stimulus.value("gallery-finder", "pagination", "20") }}
+ #   ==========================================================
+ #   data-gallery-finder-pagination-value="20"
+ #
+ # @param string controller. Nombre del controlador. Ej.: 'gallery-finder'
+ # @param string value.      Nombre del valor. Ej.: "pagination"
+ # @param string content.    Valor. Ej.: "20"
+ #}
+{% macro value(controller, value, content) %}
+    {% apply spaceless %}
+    data-{{ controller }}-{{ value }}-value="{{ content }}"
+    {% endapply %}
+{% endmacro %}
+
+{##
+ # Genera el atributo target asociado a un controlador.
+ #
+ #   {{ stimulus.target("gallery-finder", "list") }}
+ #   ===============================================
+ #   data-gallery-finder-target="list"
+ #
+ # @param string controller. Nombre del controlador. Ej.: 'gallery-finder'
+ # @param string target.     Nombre del target. Ej.: "list"
+ #}
+{% macro target(controller, target) %}
+    {% apply spaceless %}
+    data-{{ controller }}-target="{{ target }}"
+    {% endapply %}
+{% endmacro %}
+
+{##
+ # Genera el atributo action para una única acción asociado a un controlador.
+ #
+ #   {{ stimulus.action("gallery-finder", "change", "filter") }}
+ #   ===========================================================
+ #   data-action="change->gallery-finder#filter"
+ #
+ # @param string controller. Nombre del controlador. Ej.: 'gallery-finder'
+ # @param string event.      Nombre del evento. Ej.: "change"
+ # @param string action.     Nombre de la acción. Ej.: "filter"
+ #}
+{% macro action(controller, event, action) %}
+    {% apply spaceless %}
+    data-action="{{ event }}->{{ controller }}#{{ action }}"
+    {% endapply %}
+{% endmacro %}
+
+{##
+ # Genera el atributo action para una multiples acciones.
+ #
+ #   {{ stimulus.actions({"gallery-finder": {"change": ["filter", "update"]}, "ajax": {"click": "get"}}) }}
+ #   =======================================================================================================
+ #   data-action="change->gallery-finder#filter change->gallery-finder#update click->ajax#get"
+ #
+ # @param hash actions. Acciones agrupadas por controlador y evento.
+ #}
+{% macro actions(actions) %}
+    {% apply spaceless %}
+    data-action="{% for controller, events in actions %}{% for event, action in events %}{% if action is not iterable %}{% set action = [action] %}{% endif %}{% for value in action %}{{ event }}->{{ controller }}#{{ value }} {% endfor %}{% endfor %}{% endfor %}"
+    {% endapply %}
+{% endmacro %}

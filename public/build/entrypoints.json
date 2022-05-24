@@ -1,0 +1,15 @@
+{
+  "entrypoints": {
+    "frontend": {
+      "js": [
+        "http://127.0.0.1:9001/build/runtime.js",
+        "http://127.0.0.1:9001/build/vendors-node_modules_webpack-dev-server_client_index_js_protocol_ws_3A_hostname_127_0_0_1_por-66cc83.js",
+        "http://127.0.0.1:9001/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_bootstrap_dist_js_boo-7d61f3.js",
+        "http://127.0.0.1:9001/build/frontend.js"
+      ],
+      "css": [
+        "http://127.0.0.1:9001/build/frontend.css"
+      ]
+    }
+  }
+}

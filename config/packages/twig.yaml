@@ -1,5 +1,8 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
+    globals:
+            blog_template_path: "blog/"
+            macros_template_path: "blog/macros/"
 
 when@test:
     twig:

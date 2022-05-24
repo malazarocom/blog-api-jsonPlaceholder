@@ -1,0 +1,108 @@
+
+{% extends 'base.html.twig' %}
+{% import macros_template_path ~ 'elements.html.twig' as elements %}
+{% import macros_template_path ~ 'stimulus.html.twig' as stimulus %}
+{% set controller = 'index' %}
+{% set modalController = 'modal' %}
+
+{% block title_page %}Blog{{ title_page }}{% endblock %}
+
+{% block content %}
+  
+  <div class="container" {{ stimulus.controller(controller) }}>
+    <!--Section: Content-->
+    <section class="text-center">
+      <h2 class="py-5">
+        <strong>
+          Ultimas noticias
+          </strong>
+      </h2>
+
+      <div class="row" {{ stimulus.target(controller, 'cardlist') }} >
+
+        {% for article in articles %}
+          <div class="article col-lg-4 col-md-12 px-4 mb-4">
+            {{elements.card_article(article)}}
+          </div>
+        {% endfor %}
+
+        <p><button class="view-more-button">Ver m&aacute;s</button></p>
+      </div>
+      
+      <div class="page-load-status">
+        <div class="loader-ellips infinite-scroll-request">
+          <span class="loader-ellips__dot"></span>
+          <span class="loader-ellips__dot"></span>
+          <span class="loader-ellips__dot"></span>
+          <span class="loader-ellips__dot"></span>
+        </div>
+        
+      </div>
+      
+      
+    </section>
+    <!--Section: Content-->
+
+  <div id="app" {{ stimulus.controller(modalController) }}>
+      <button data-action="click->index#launchDemo">Launch modal</button>
+  
+      <div class="modal" data-controller="modal co-host-modal" data-target="index.modal">
+          <div class="modal-dialog modal-xl">
+              <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-action="click->modal#close" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+
+                    <article>
+                        <!-- Post header-->
+                        <header class="mb-4">
+                            <!-- Post title-->
+                            <h1 class="fw-bolder mb-1" data-target="co-host-modal.title"></h1>
+                            <h2 data-target="co-host-modal.title"></h2>
+                            <!-- Post meta content-->
+                            <div class="text-muted fst-italic mb-2">
+                              Posted on January 1, 2022 by 
+                              <span data-target="co-host-modal.name"></span>
+                            </div>
+                            <!-- Post categories-->
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">
+                              <i class="fa-solid fa-envelope"></i>
+                              <span class="text-white-50 ">Email</span> :: 
+                              <span data-target="co-host-modal.email"></span>
+                            </a>
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">
+                              <i class="fa-solid fa-memo"></i>
+                              <span class="text-white-50 ">Webv :: 
+                              <span data-target="co-host-modal.website"></span>
+                            </a>
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">
+                              <i class="fa-solid fa-mobile-screen"></i>
+                              <span class="text-white-50 ">Phone</span> :: 
+                              <span data-target="co-host-modal.phone"></span>
+                            </a>
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">
+                              <i class="fa-solid fa-user-astronaut"></i>
+                              <span class="text-white-50 ">Username</span> :: 
+                              <span data-target="co-host-modal.username"></span>
+                            </a>
+                        </header>
+                        <!-- Post content-->
+                        <section class="mb-5">
+                            <p class="fs-5 mb-4">
+                              <h5 data-target="co-host-modal.body"></h5>
+                            </p>
+                        </section>
+                    </article>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-action="click->modal#close">Cerrar</button
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  </div>
+{% endblock %}

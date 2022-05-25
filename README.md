@@ -32,10 +32,6 @@
 
         http://127.0.0.1:8101/api
 
-- Probar API:
-
-        http://127.0.0.1:8101/api
-
 - Probar Front:
 
         http://127.0.0.1:8000/blog/articles
@@ -51,6 +47,7 @@ De igual manera se utiliza la Interfaz HttpClientInterface para poder implementa
 De tal manera que podrimamos añadir otro cliente como Guzzle creando Guzzleclient e implementandolo en vez del SymfonyHttpClient de Symfony.
 
 En la parte front se utiliza: 
-    - Bootstrap 5 para la maquetación
-    - Extensión twig
-    - Un plugin js 'infinite scroll' cargado en stimulus.
+    Bootstrap 5 para la maquetación
+    Extensión twig
+    Un plugin js 'infinite scroll' cargado en stimulus.
+    Modal con stimulus para cargar los detalles del artículo y autor.

@@ -20,32 +20,31 @@ export default class extends Controller {
     
     loadContent() {
         console.log('funcion:loadContent');
-   
-          //-------------------------------------//
-          // init Infinte Scroll
-          let elem = this.cardlistTarget;
-          var infScroll = new InfiniteScroll( elem, {
+
+        // init Infinte Scroll
+        let elem = this.cardlistTarget;
+        var infScroll = new InfiniteScroll( elem, {
             path: function() {
                 let pageNumber = ( this.loadCount + 1 );
                 return `/blog/articles/${pageNumber}`;
-              },
+            },
             append: '.article',
             // disable loading on scroll 
             loadOnScroll: false,
             status: '.page-load-status',
-          });
-          
+        });
+
           // load next page & enable loading on scroll on button click
-          
-          var viewMoreButton = elem.querySelector('.view-more-button');
-          viewMoreButton.addEventListener( 'click', function() {
+
+        var viewMoreButton = elem.querySelector('.view-more-button');
+        viewMoreButton.addEventListener( 'click', function() {
             // load next page
             infScroll.loadNextPage();
             // enable loading on scroll
             infScroll.options.loadOnScroll = true;
             // hide page
             button.style.display = 'none';
-          });
+        });
     }
 
     launchModal(event) {

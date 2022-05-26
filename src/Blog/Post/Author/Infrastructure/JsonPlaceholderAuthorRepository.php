@@ -2,13 +2,13 @@
 
 namespace App\Blog\Post\Author\Infrastructure;
 
-use App\Blog\Post\Author\Domain\AuthorId;
 use App\Blog\Post\Author\Domain\Author;
-use App\Blog\Post\Author\Domain\AuthorsCollection;
+use App\Blog\Post\Author\Domain\AuthorId;
 use App\Blog\Post\Author\Domain\AuthorNotFound;
 use App\Blog\Post\Author\Domain\AuthorRepository;
-use App\Shared\Infrastructure\JsonPlaceholder\JsonPlaceholderClient;
+use App\Blog\Post\Author\Domain\AuthorsCollection;
 use App\Shared\Infrastructure\JsonPlaceholder\JsonPlaceholderApiAuthorsRequest;
+use App\Shared\Infrastructure\JsonPlaceholder\JsonPlaceholderClient;
 
 class JsonPlaceholderAuthorRepository implements AuthorRepository
 {

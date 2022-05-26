@@ -4,8 +4,8 @@ namespace App\Shared;
 
 use ArrayIterator;
 use Countable;
-use IteratorAggregate;
 use InvalidArgumentException;
+use IteratorAggregate;
 
 abstract class Collection implements Countable, IteratorAggregate
 {
@@ -63,9 +63,7 @@ abstract class Collection implements Countable, IteratorAggregate
     {
         $class = $this->type();
         if (!$item instanceof $class) {
-            throw new InvalidArgumentException(
-                sprintf('The item <%s> must be an instance of <%s>', get_class($item), $class)
-            );
+            throw new InvalidArgumentException(sprintf('The item <%s> must be an instance of <%s>', get_class($item), $class));
         }
     }
 }

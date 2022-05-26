@@ -11,6 +11,7 @@ class ArticleDataPersister implements DataPersisterInterface
         private DataPersisterInterface $decoratedDataPersister
     ) {
     }
+
     public function supports($data): bool
     {
         return $data instanceof Article;
@@ -20,6 +21,7 @@ class ArticleDataPersister implements DataPersisterInterface
     {
         return $this->decoratedDataPersister->persist($data);
     }
+
     public function remove($data)
     {
         $this->decoratedDataPersister->remove($data);

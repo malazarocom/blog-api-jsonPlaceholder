@@ -4,16 +4,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Blog\Article\Domain;
 
+use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
+use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\Client;
 use App\Blog\Post\Article\Domain\Article;
 use Symfony\Component\HttpFoundation\Response;
-use ApiPlatform\Core\Bridge\Symfony\Routing\Router;
-use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\Client;
-use Symfony\Contracts\Service\ServiceProviderInterface;
-use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
-use App\Blog\Post\Article\Domain\ArticleId;
-use App\Blog\Post\Article\Domain\AuthorId as DomainAuthorId;
-use App\Blog\Post\Author\Domain\Author;
-use App\Blog\Post\Author\Domain\AuthorId;
 
 class ArticlesApiTest extends ApiTestCase
 {
@@ -33,31 +27,30 @@ class ArticlesApiTest extends ApiTestCase
         self::assertJsonContains([
             '@context' => '/api/contexts/article',
             '@id' => '/api/articles',
-            '@type' => 'hydra:Collection'
+            '@type' => 'hydra:Collection',
         ]);
     }
 
     public function testCreateArticle(): void
     {
         $response = $this->client->request('POST', '/api/articles', ['json' => [
-            "id" => [
-                "value" => "string"
+            'id' => [
+                'value' => 'string',
             ],
-            "author" => [
-                "id" => [
-                    "value" => 1
+            'author' => [
+                'id' => [
+                    'value' => 1,
                 ],
-                "name" => "string",
-                "username" => "string",
-                "email" => "string",
-                "phone" => "string",
-                "website" => "string"
+                'name' => 'string',
+                'username' => 'string',
+                'email' => 'string',
+                'phone' => 'string',
+                'website' => 'string',
             ],
-            "title" => "string",
-            "body" => "string",
-            "createdAt" => "2022-05-24T15:41:37.351Z",
-            "updatedAt" => "2022-05-24T15:41:37.351Z"
-
+            'title' => 'string',
+            'body' => 'string',
+            'createdAt' => '2022-05-24T15:41:37.351Z',
+            'updatedAt' => '2022-05-24T15:41:37.351Z',
         ]]);
 
         // TODO self::assertResponseStatusCodeSame(Response::HTTP_CREATED);

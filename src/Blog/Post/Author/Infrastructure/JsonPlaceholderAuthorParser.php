@@ -7,7 +7,6 @@ use App\Blog\Post\Author\Domain\AuthorId;
 
 class JsonPlaceholderAuthorParser
 {
-
     public function toDomain(array $jsonPlaceholderUser): Author
     {
         $authorId = new AuthorId($jsonPlaceholderUser['id']);

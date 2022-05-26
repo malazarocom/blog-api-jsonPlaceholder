@@ -4,13 +4,13 @@ namespace App\Blog\Post\Article\Infrastructure;
 
 use App\Blog\Post\Article\Domain\Article;
 use App\Blog\Post\Article\Domain\ArticleId;
-use App\Blog\Post\Article\Domain\ArticlesCollection;
-use App\Blog\Post\Article\Domain\ArticleRepository;
 use App\Blog\Post\Article\Domain\ArticleNotFound;
+use App\Blog\Post\Article\Domain\ArticleRepository;
+use App\Blog\Post\Article\Domain\ArticlesCollection;
 use App\Blog\Post\Author\Domain\AuthorId;
-use App\Shared\Infrastructure\JsonPlaceholder\JsonPlaceholderClient;
 use App\Shared\Infrastructure\JsonPlaceholder\JsonPlaceholderApiArticlesRequest;
 use App\Shared\Infrastructure\JsonPlaceholder\JsonPlaceholderApiAuthorsRequest;
+use App\Shared\Infrastructure\JsonPlaceholder\JsonPlaceholderClient;
 
 final class JsonPlaceholderArticleRepository implements ArticleRepository
 {
@@ -26,6 +26,7 @@ final class JsonPlaceholderArticleRepository implements ArticleRepository
 
         $articlesArray = array_map(function ($articleFromExternalProvider) {
             $authorFromExternalProvider = $this->getAuthorById($articleFromExternalProvider);
+
             return $this->jsonParser->toDomain($articleFromExternalProvider, $authorFromExternalProvider);
         }, $articlesFromExternalProvider);
 
@@ -50,6 +51,7 @@ final class JsonPlaceholderArticleRepository implements ArticleRepository
         if (!array_key_exists('userId', $articleFromExternalProvider)) {
             return null;
         }
+
         return $this->jsonPlaceholderClient->request(new JsonPlaceholderApiAuthorsRequest(new AuthorId($articleFromExternalProvider['userId'])));
     }
 }

@@ -95,7 +95,8 @@
             "@auto-scripts"
         ],
         "phpstan": "phpstan analyse src tests",
-        "phpunit": "php bin/phpunit"
+        "phpunit": "php bin/phpunit",
+        "fixer": "./vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix tests"
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -107,6 +108,7 @@
         }
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.8",
         "justinrainbow/json-schema": "^5.2",
         "phpstan/phpstan": "^1.6",
         "phpunit/phpunit": "^9.5",

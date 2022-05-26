@@ -2,10 +2,10 @@
 
 namespace App\Tests\Blog\Article\Domain;
 
-use App\Blog\Post\Author\Domain\Author;
 use App\Blog\Post\Article\Domain\Article;
-use App\Blog\Post\Author\Domain\AuthorId;
 use App\Blog\Post\Article\Domain\ArticleId;
+use App\Blog\Post\Author\Domain\Author;
+use App\Blog\Post\Author\Domain\AuthorId;
 use PHPUnit\Framework\TestCase;
 
 class ArticleTest extends TestCase
@@ -17,7 +17,7 @@ class ArticleTest extends TestCase
     public function setUpValidArticle(): void
     {
         $this->articleWithAuthorId = new Article(
-            new ArticleId("1"),
+            new ArticleId('1'),
             Author::createEmpty(new AuthorId(1)),
             'The article title',
             'The article body'

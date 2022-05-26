@@ -3,7 +3,6 @@
 namespace App\Shared\Infrastructure\JsonPlaceholder;
 
 use App\Blog\Post\Article\Domain\ArticleId;
-use App\Shared\Infrastructure\JsonPlaceholder\JsonPlaceholderGetRequest;
 
 class JsonPlaceholderApiArticlesRequest extends JsonPlaceholderGetRequest
 {

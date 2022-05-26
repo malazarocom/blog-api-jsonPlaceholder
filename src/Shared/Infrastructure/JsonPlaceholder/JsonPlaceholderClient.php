@@ -2,7 +2,6 @@
 
 namespace App\Shared\Infrastructure\JsonPlaceholder;
 
-use App\Shared\Infrastructure\JsonPlaceholder\JsonPlaceholderRequest;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class JsonPlaceholderClient

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\DataProvider;
 
-use ApiPlatform\Core\Exception\InvalidIdentifierException;
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\SerializerAwareDataProviderInterface;
 use ApiPlatform\Core\DataProvider\SerializerAwareDataProviderTrait;
+use ApiPlatform\Core\Exception\InvalidIdentifierException;
 use App\Blog\Post\Article\Domain\Article;
 use App\Blog\Post\Article\Domain\ArticleId;
 use App\Blog\Post\Article\Domain\ArticleRepository;
@@ -32,7 +32,6 @@ final class ArticleItemDataProvider implements ItemDataProviderInterface, Serial
      * @param array<int, mixed> $context
      *
      * @throws InvalidIdentifierException
-     *
      */
     public function getItem(string $resourceClass, $id, string $operationName = null, array $context = []): ?Article
     {

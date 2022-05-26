@@ -4,8 +4,6 @@ namespace App\Blog\Post\Article\Infrastructure;
 
 use App\Blog\Post\Article\Domain\Article;
 use App\Blog\Post\Article\Domain\ArticleId;
-use App\Blog\Post\Author\Domain\Author;
-use App\Blog\Post\Author\Domain\AuthorId;
 use App\Blog\Post\Author\Infrastructure\JsonPlaceholderAuthorParser;
 
 class JsonPlaceholderPostParser

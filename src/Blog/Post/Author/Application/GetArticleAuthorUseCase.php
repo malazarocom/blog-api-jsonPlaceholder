@@ -17,8 +17,6 @@ class GetArticleAuthorUseCase
     }
 
     /**
-     * @param GetArticleAuthorQuery $query
-     * @return Author
      * @throws ArticleNotFound
      * @throws AuthorNotFound
      */

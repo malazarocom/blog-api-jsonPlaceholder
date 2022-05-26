@@ -5,7 +5,6 @@ namespace App\Blog\Post\Author\Domain;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Shared\Arrayable;
-use App\Blog\Post\Author\Domain\AuthorId;
 
 /** A author of a article. */
 #[ApiResource]
@@ -68,12 +67,12 @@ class Author implements Arrayable
     public function asArray(): array
     {
         $asArray = [
-            'id'        => $this->getId()->getValue(),
-            'name'      => $this->getName(),
-            'username'  => $this->getUsername(),
-            'email'     => $this->getEmail(),
-            'phone'     => $this->getPhone(),
-            'website'   => $this->getWebsite(),
+            'id' => $this->getId()->getValue(),
+            'name' => $this->getName(),
+            'username' => $this->getUsername(),
+            'email' => $this->getEmail(),
+            'phone' => $this->getPhone(),
+            'website' => $this->getWebsite(),
         ];
 
         foreach ($asArray as $field => $value) {

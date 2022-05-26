@@ -2,16 +2,16 @@
 
 namespace App\Tests\Blog\Article\Application;
 
-use PHPUnit\Framework\TestCase;
-use App\Blog\Post\Author\Domain\Author;
+use App\Blog\Post\Article\Application\GetArticlesQuery;
+use App\Blog\Post\Article\Application\GetArticlesUseCase;
 use App\Blog\Post\Article\Domain\Article;
-use App\Blog\Post\Author\Domain\AuthorId;
 use App\Blog\Post\Article\Domain\ArticleId;
 use App\Blog\Post\Article\Domain\ArticleNotFound;
 use App\Blog\Post\Article\Domain\ArticleRepository;
 use App\Blog\Post\Article\Domain\ArticlesCollection;
-use App\Blog\Post\Article\Application\GetArticlesQuery;
-use App\Blog\Post\Article\Application\GetArticlesUseCase;
+use App\Blog\Post\Author\Domain\Author;
+use App\Blog\Post\Author\Domain\AuthorId;
+use PHPUnit\Framework\TestCase;
 
 class GetArticlesUseCaseTest extends TestCase
 {
@@ -22,9 +22,9 @@ class GetArticlesUseCaseTest extends TestCase
     /** @beforeClass */
     public function setUpArticleIds(): void
     {
-        $this->articleNotFound = new ArticleId("9999");
-        $this->firstArticleId = new ArticleId("1");
-        $this->secondArticleId = new ArticleId("2");
+        $this->articleNotFound = new ArticleId('9999');
+        $this->firstArticleId = new ArticleId('1');
+        $this->secondArticleId = new ArticleId('2');
     }
 
     private ArticlesCollection $articlesExpected;
@@ -48,7 +48,7 @@ class GetArticlesUseCaseTest extends TestCase
 
         $this->articlesExpected = new ArticlesCollection([
             $this->firstArticle,
-            $this->secondArticle
+            $this->secondArticle,
         ]);
     }
 
@@ -68,6 +68,7 @@ class GetArticlesUseCaseTest extends TestCase
             ->with(
                 $this->callback(function (ArticleId $articleId) {
                     $articlesIdToTest = [$this->articleNotFound, $this->firstArticleId, $this->secondArticleId];
+
                     return in_array($articleId, $articlesIdToTest);
                 })
             )
@@ -76,7 +77,10 @@ class GetArticlesUseCaseTest extends TestCase
                     throw new ArticleNotFound($this->articleNotFound);
                 }
 
-                if ($articleId->getValue() === 1) return $this->firstArticle;
+                if (1 === $articleId->getValue()) {
+                    return $this->firstArticle;
+                }
+
                 return $this->secondArticle;
             });
 

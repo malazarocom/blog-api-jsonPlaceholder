@@ -2,29 +2,24 @@
 
 namespace App\Shared\Front\Controller;
 
+use App\Blog\Post\Article\Application\GetArticlesQuery;
+use App\Blog\Post\Article\Application\GetArticlesUseCase;
 use App\Blog\Post\Article\Domain\Article;
 use App\Blog\Post\Article\Domain\ArticleId;
 use App\Blog\Post\Article\Domain\ArticleNotFound;
-use App\Blog\Post\Article\Application\GetArticlesQuery;
-use App\Blog\Post\Article\Application\GetArticlesUseCase;
-use App\Blog\Post\Author\Domain\AuthorNotFound;
 use App\Blog\Post\Author\Application\GetArticleAuthorQuery;
 use App\Blog\Post\Author\Application\GetArticleAuthorUseCase;
-use App\Shared\Front\Controller\BlogBaseController;
+use App\Blog\Post\Author\Domain\AuthorNotFound;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route("/blog")]
+#[Route('/blog')]
 class ArticlesController extends BlogBaseController
 {
     /**
      * @Route("/articles/{page}", methods={"GET"}, name="get_all_articles")
-     *
-     * @param GetArticlesUseCase $getArticlesUseCase
-     * @param string $page
-     * @return Response
      */
-    public function allArticles(GetArticlesUseCase $getArticlesUseCase, string $page = "1"): Response
+    public function allArticles(GetArticlesUseCase $getArticlesUseCase, string $page = '1'): Response
     {
         $query = new GetArticlesQuery();
         $articles = $getArticlesUseCase->search($query);
@@ -32,20 +27,15 @@ class ArticlesController extends BlogBaseController
         return $this->response(
             'blog/index.html.twig',
             [
-                'articles'      => $articles,
-                'title_page'    => 'All articles',
-                'page'          => $page
+                'articles' => $articles,
+                'title_page' => 'All articles',
+                'page' => $page,
             ]
         );
     }
 
     /**
      * @Route("/articles/{articleId}", methods={"GET"}, name="article_details", requirements={"articleId"="\d+"})
-     *
-     * @param string $articleId
-     * @param GetArticlesUseCase $getArticlesUseCase
-     * @param GetArticleAuthorUseCase $getArticleAuthorUseCase
-     * @return Response
      */
     public function articleDetails(
         string $articleId,
@@ -66,21 +56,21 @@ class ArticlesController extends BlogBaseController
                 [
                     'title' => "Blog article | #{$article->getId()->getValue()}",
                     'article' => $article,
-                    'title_page' => $article->getTitle()
+                    'title_page' => $article->getTitle(),
                 ]
             );
         } catch (ArticleNotFound) {
             return $this->render(
                 'errors/not_found.html.twig',
                 [
-                    'item_not_found' => 'Article'
+                    'item_not_found' => 'Article',
                 ]
             );
         } catch (AuthorNotFound) {
             return $this->render(
                 'errors/not_found.html.twig',
                 [
-                    'item_not_found' => "Article author #{$article->getId()->getValue()}"
+                    'item_not_found' => "Article author #{$article->getId()->getValue()}",
                 ]
             );
         }
@@ -90,13 +80,12 @@ class ArticlesController extends BlogBaseController
      * @Route("/test", methods={"GET"}, name="get_test")
      */
     public function test(): Response
-    {;
-
+    {
         return $this->response(
             'test.html.twig',
             [
                 // 'articles'      => $articles,
-                'title_page'    => 'All articles'
+                'title_page' => 'All articles',
             ]
         );
     }

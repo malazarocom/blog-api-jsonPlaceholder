@@ -2,9 +2,8 @@
 
 namespace App\Blog\Post\Article\Domain;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiProperty;
-use App\Blog\Post\Article\Domain\ArticleId;
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Blog\Post\Author\Domain\Author;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -12,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     collectionOperations: ['get', 'post'],
     itemOperations: ['get'],
-    shortName: "article"
+    shortName: 'article'
 )]
 class Article
 {
@@ -115,10 +114,10 @@ class Article
     public function asArray(): array
     {
         return [
-            'id'        => $this->getId()->getValue(),
-            'author'    => $this->getAuthor()->asArray(),
-            'title'     => $this->getTitle(),
-            'body'      => $this->getBody()
+            'id' => $this->getId()->getValue(),
+            'author' => $this->getAuthor()->asArray(),
+            'title' => $this->getTitle(),
+            'body' => $this->getBody(),
         ];
     }
 }

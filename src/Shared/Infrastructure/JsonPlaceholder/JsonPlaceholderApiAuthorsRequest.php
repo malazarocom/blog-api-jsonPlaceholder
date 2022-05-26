@@ -2,7 +2,6 @@
 
 namespace App\Shared\Infrastructure\JsonPlaceholder;
 
-use App\Shared\Infrastructure\JsonPlaceholder\JsonPlaceholderGetRequest;
 use App\Blog\Post\Author\Domain\AuthorId;
 
 class JsonPlaceholderApiAuthorsRequest extends JsonPlaceholderGetRequest

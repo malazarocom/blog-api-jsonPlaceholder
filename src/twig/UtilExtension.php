@@ -18,7 +18,7 @@ class UtilExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('array_check_list', [$this, 'arrayCheckList'])
+            new TwigFunction('array_check_list', [$this, 'arrayCheckList']),
         ];
     }
 
@@ -30,16 +30,13 @@ class UtilExtension extends AbstractExtension
             return $text;
         }
 
-        return substr($text, 0, $maxLen - 3) . $ellipsis;
+        return substr($text, 0, $maxLen - 3).$ellipsis;
     }
 
     /**
      * Determines if an array is list.
      *
      * An array is "list" if it have sequential numerical keys beginning with zero.
-     *
-     * @param  array  $array
-     * @return bool
      */
     public function arrayCheckList(array $array): bool
     {
